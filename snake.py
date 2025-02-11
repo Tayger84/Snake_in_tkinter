@@ -1,4 +1,6 @@
 from tkinter import *
+from snake_body import *
+
 # main window
 window = Tk()
 window.configure(bg="#73f094")
@@ -25,12 +27,12 @@ a = Button(buttons_group, text=" ◄ ", command="", width=4, font=("Helvetica", 
 s = Button(buttons_group, text=" ▼ ", command="", width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=1, padx=3)
 d = Button(buttons_group, text=" ► ", command="", width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=2, padx=3)
 
-# snake function
-def snake():
-    canvas.create_rectangle(100, 100, 110, 110, fill="black")
-
 # snake initialization
-snake()
+snake = Snake(canvas, window)
+snake.change_items()
+snake.change_coords(window)
+
+
 
 
 # main loop
