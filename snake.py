@@ -1,11 +1,11 @@
-from tkinter import *
-from snake_body import *
+from tkinter import Tk, Canvas, Button, Label, Frame
+from snake_body import Snake, Fruit
 
 # main window
 window = Tk()
 window.configure(bg="#73f094")
 window.title("Snake Game")
-window.iconbitmap("snake.ico")
+window.iconbitmap("icons\snake.ico")
 window.resizable(False, False)
 
 # score label for actual state of score
@@ -29,8 +29,10 @@ d = Button(buttons_group, text=" ► ", command="", width=4, font=("Helvetica", 
 
 # snake initialization
 snake = Snake(canvas, window)
-snake.change_items()
-snake.change_coords(window)
+#snake.snake_move(10, 0)
+
+snake.move()
+
 
 
 
