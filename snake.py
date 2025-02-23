@@ -5,6 +5,7 @@ from snake_body import Snake, Fruit
 window = Tk()
 window.configure(bg="#73f094")
 window.title("Snake Game")
+window.focus_set()
 window.iconbitmap("snake.ico")
 window.resizable(False, False)
 
@@ -22,18 +23,22 @@ buttons_group = Frame(window, bg="#73e090")
 buttons_group.grid(row=2, pady=10)
 
 # snake initialization
-snake = Snake(canvas, window)
+snake = Snake(canvas)
 #snake.snake_move(10, 0)
 
 snake.move()
 
 # Buttons control via mause
-w = Button(buttons_group, text=" ▲ ", command=snake.move_up, width=4, font=("Helvetica", 15, "bold")).grid(row=0, column=0, columnspan=3, pady=5)
-a = Button(buttons_group, text=" ◄ ", command=snake.move_left, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=0, padx=3)
-s = Button(buttons_group, text=" ▼ ", command=snake.move_down, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=1, padx=3)
-d = Button(buttons_group, text=" ► ", command=snake.move_right, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=2, padx=3)
+Button(buttons_group, text=" ▲ ", command=snake.move_up, width=4, font=("Helvetica", 15, "bold")).grid(row=0, column=0, columnspan=3, pady=5)
+Button(buttons_group, text=" ◄ ", command=snake.move_left, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=0, padx=3)
+Button(buttons_group, text=" ▼ ", command=snake.move_down, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=1, padx=3)
+Button(buttons_group, text=" ► ", command=snake.move_right, width=4, font=("Helvetica", 15, "bold")).grid(row=1, column=2, padx=3)
 
-
+# Control via keyboard
+window.bind("<Up>",  snake.move_up, None)
+window.bind("<Down>", snake.move_down, None)
+window.bind("<Left>", snake.move_left, None)
+window.bind("<Right>", snake.move_right, None)
 
 
 
