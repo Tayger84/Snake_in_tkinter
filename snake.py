@@ -6,7 +6,7 @@ window = Tk()
 window.configure(bg="#73f094")
 window.title("Snake Game")
 window.focus_set()
-window.iconbitmap("snake.ico")
+window.iconbitmap("icons/snake.ico")
 window.resizable(False, False)
 
 # score label for actual state of score
@@ -24,9 +24,10 @@ buttons_group.grid(row=2, pady=10)
 
 # snake initialization
 snake = Snake(canvas)
+snake.move()
 #snake.snake_move(10, 0)
 
-snake.move()
+#snake.move()
 
 # Buttons control via mause
 Button(buttons_group, text=" ▲ ", command=snake.move_up, width=4, font=("Helvetica", 15, "bold")).grid(row=0, column=0, columnspan=3, pady=5)
