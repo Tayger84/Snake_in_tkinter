@@ -1,5 +1,5 @@
 from tkinter import Tk, Canvas, Button, Label, Frame
-from snake_body_2 import Snake, C_HIGHT, C_WIDTH
+from snake_body_2 import Snake, C_DIMENSION
 
 
 # main window
@@ -8,14 +8,14 @@ window.configure(bg="#73f094")
 window.title("Snake Game")
 window.focus_set()
 window.iconbitmap("snake.ico")
-window.resizable(False, False)
+window.resizable(False, False)  
 
 # score label for actual state of score
 score = Label(window, text="Score: 0", font=("Helvetica", 32, "bold"), bg="#73f094")
 score.grid(row=0)
 
 # canvas for snake area
-canvas = Canvas(window, width=C_WIDTH, height=C_HIGHT, bg="white", highlightthickness=3, 
+canvas = Canvas(window, width=C_DIMENSION, height=C_DIMENSION, bg="white", highlightthickness=3, 
     highlightbackground='grey', relief="groove")
 canvas.grid(row=1, padx=10, pady=10)
 
