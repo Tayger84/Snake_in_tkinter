@@ -41,11 +41,11 @@ class Snake:
         self.fruit = SubElement(x, y) # creating new fruit object in safety position in the game board
         
 
-    def create_game_object(self, list_obj, color="gray"):
+    def create_game_object(self, obj, color="gray"):
         'translate indexis to the BOARD demensions and drawing an object'
-        for s in list_obj:
-            x_coord, y_coord = s.get_position() # get coordination of the object
-            self.canvas.create_rectangle(BOARD[x_coord][y_coord], BOARD[x_coord+1][y_coord+1], fill=color) # game_object to the screen
+        #for s in list_obj:
+        x_coord, y_coord = obj # get coordination of the object
+        self.canvas.create_rectangle(BOARD[x_coord][y_coord], BOARD[x_coord+1][y_coord+1], fill=color) # game_object to the screen
 
 
     def snake_move(self):
@@ -61,8 +61,10 @@ class Snake:
 
         self.snake.pop()
         self.canvas.delete('all')
-        self.create_game_object(self.snake)
-        self.create_game_object((self.fruit), color='red')
+        for part in self.get_snake_position():
+            print(part)
+            self.create_game_object(part)
+        self.create_game_object((self.fruit.get_position()), color='red')
 
         
 
