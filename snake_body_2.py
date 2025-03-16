@@ -39,34 +39,37 @@ class Snake:
                 break
 
         self.fruit = SubElement(x, y) # creating new fruit object in safety position in the game board
-        
+       
 
     def create_game_object(self, obj, color="gray"):
         'translate indexis to the BOARD demensions and drawing an object'
         #for s in list_obj:
         x_coord, y_coord = obj # get coordination of the object
+        
         self.canvas.create_rectangle(BOARD[x_coord][y_coord], BOARD[x_coord+1][y_coord+1], fill=color) # game_object to the screen
 
 
+
     def snake_move(self):
-        x_coord, y_coord = self.snake[0].get_position()
-        x_coord += self.x
-        y_coord += self.y
+        snake_position = self.get_snake_position() # all snake parts coords
+        x_coord, y_coord = snake_position[0] # head of the snake
+        x_coord += self.x # update of x axis
+        y_coord += self.y # update of y axis
+        
+        if 0 > x_coord:
+            return
+        
+        self.snake.insert(0, SubElement(x_coord, y_coord)) # edit 
 
         if self.fruit == None:
             self.create_fruit()
+  
         
-        self.snake.insert(0, SubElement(x_coord, y_coord))
-
-
         self.snake.pop()
         self.canvas.delete('all')
-        for part in self.get_snake_position():
-            print(part)
+        for part in snake_position:
             self.create_game_object(part)
-        self.create_game_object((self.fruit.get_position()), color='red')
-
-        
+        self.create_game_object(self.fruit.get_position(), color="red")
 
 
         self.canvas.after(300, self.snake_move)
