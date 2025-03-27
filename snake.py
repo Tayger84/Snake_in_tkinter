@@ -1,15 +1,6 @@
 from tkinter import Tk, Canvas, Button, Label, Frame, messagebox
 from snake_body_3 import Snake, C_DIMENSION
 
-
-# def update_score():
-#     score.config(text=f'Score: {snake.get_score()}')
-    
-
-# def update_label():
-#     update_score()
-#     window.after(100, update_label)
-
 # main window
 window = Tk()
 window.configure(bg="#73f094")
@@ -19,7 +10,7 @@ window.iconbitmap("snake.ico")
 window.resizable(False, False)  
 
 # score label for actual state of score
-score = Label(window, text="Score: 0", font=("Helvetica", 32, "bold"), bg="#73f094")
+score = Label(window, text="Score: 0 * High Score: 0", font=("Helvetica", 22, "bold"), bg="#73f094")
 score.grid(row=0)
 
 # canvas for snake area
@@ -32,7 +23,7 @@ buttons_group = Frame(window, bg="#73e090")
 buttons_group.grid(row=2, pady=10)
 
 # snake initialization
-snake = Snake(canvas)
+snake = Snake(canvas, score)
 #update_label()
 snake.snake_move()
 

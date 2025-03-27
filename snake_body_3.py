@@ -21,11 +21,13 @@ class SubElement:
 
 class Snake:
     'The main class for the Snake body'
-    def __init__(self, canvas):
+    def __init__(self, canvas, score):
         self.canvas = canvas
         self.snake = [SubElement(C_DIMENSION//CELL_SIZE//2, y) for y in range(11, 8, -1)]
         self.fruit = self.create_fruit()
-        self.score = 0
+        self.score = score
+        self.high_score = self.get_high_score()
+        self.score_value = 0
         self.x = 0
         self.y = 1
 
@@ -56,8 +58,15 @@ class Snake:
         else:
             return False
         
+    def get_high_score(self, modifier="r"):
+        with open("high_score.txt", modifier) as file:
+            if modifier == "r":
+                return int(file.read())
+            elif modifier == "w":
+                file.write(str(self.score_value))
+                
     def reset_snake(self):
-        self.score = 0
+        
         self.canvas.delete("all")
     
         
@@ -67,9 +76,6 @@ class Snake:
         x_coord, y_coord = obj # get coordination of the object
         return self.canvas.create_oval(x_coord * CELL_SIZE, y_coord * CELL_SIZE, (x_coord + 1) * CELL_SIZE, (y_coord + 1) * CELL_SIZE, fill=color) # game_object to the screen
     
-    def get_score(self):
-        return self.score
-
     def moving(self, direct):
         'snake moving control method, based on the change main increase of x and y axes'
         if direct == "Up":
@@ -87,7 +93,7 @@ class Snake:
 
 
     def snake_move(self):
-        
+        self.score.config(text=f'Score: {self.score_value} * High Score: {self.high_score}')
         self.canvas.delete("all")
         [self.create_game_object(part) for part in self.get_snake_position()] # snake drawing
         self.create_game_object((self.fruit.get_position()), color='red') # fruit drawing
@@ -97,13 +103,17 @@ class Snake:
         
         if head == self.fruit.get_position():
             self.create_fruit()
-            self.score += 10
+            self.score_value += 10
+            if self.high_score < self.score_value:
+                self.high_score = self.score_value
+
         else:
             self.snake.pop()
 
         if self.check_collision():
             self.canvas.after(200, self.snake_move)
-
+        else:
+            self.get_high_score("w")
 
         
 # BOARD = [[(x, y) for x in range(0, C_DIMENSION+CELL_SIZE, CELL_SIZE)] for y in range(0, C_DIMENSION+CELL_SIZE, CELL_SIZE)] # game field where the snake is in moving
