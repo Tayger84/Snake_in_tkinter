@@ -106,14 +106,14 @@ class Snake:
             self.score_value += 10
             if self.high_score < self.score_value:
                 self.high_score = self.score_value
+                self.get_high_score("w")
 
         else:
             self.snake.pop()
 
         if self.check_collision():
             self.canvas.after(200, self.snake_move)
-        else:
-            self.get_high_score("w")
+
 
         
 # BOARD = [[(x, y) for x in range(0, C_DIMENSION+CELL_SIZE, CELL_SIZE)] for y in range(0, C_DIMENSION+CELL_SIZE, CELL_SIZE)] # game field where the snake is in moving
