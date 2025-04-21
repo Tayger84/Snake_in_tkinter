@@ -1,5 +1,9 @@
-from tkinter import Tk, Canvas, Button, Label, Frame, messagebox
-from snake_body_3 import Snake, C_DIMENSION
+from tkinter import Tk, Canvas, Button, Label, Frame
+from snake_body import Snake, C_DIMENSION
+
+def game():
+    snake.snake_move()
+    canvas.after(300, game)
 
 # main window
 window = Tk()
@@ -24,8 +28,9 @@ buttons_group.grid(row=2, pady=10)
 
 # snake initialization
 snake = Snake(canvas, score)
-#update_label()
-snake.snake_move()
+
+game() # start of the Snake game
+
 
 # Control of the snake
 set_control = [
