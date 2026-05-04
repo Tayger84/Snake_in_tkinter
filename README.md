@@ -4,6 +4,9 @@ A small desktop Snake game built with Python and Tkinter.
 
 This project was created as a personal learning project focused on practicing object-oriented programming, GUI event handling, game state management and basic game logic in Python.
 
+The project was originally developed and tested on Windows.  
+It may also run on Linux, but window icon behavior can differ depending on the operating system and Tkinter environment.
+
 ---
 
 ## Features

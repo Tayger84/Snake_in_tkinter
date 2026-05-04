@@ -1,4 +1,5 @@
-from tkinter import Tk, Canvas, Button, Label, Frame
+from pathlib import Path
+from tkinter import Tk, Canvas, Button, Label, Frame, TclError
 from snake_body import Snake, C_DIMENSION
 
 def game():
@@ -6,11 +7,15 @@ def game():
     canvas.after(300, game)
 
 # main window
-window = Tk()
+window = Tk()    
 window.configure(bg="#73f094")
 window.title("Snake Game")
 window.focus_set()
-window.iconbitmap("snake.ico")
+try:
+    window.iconbitmap("assets/snake.ico")
+except TclError: # for linux environment
+    pass 
+    
 window.resizable(False, False)  
 
 # score label for actual state of score
